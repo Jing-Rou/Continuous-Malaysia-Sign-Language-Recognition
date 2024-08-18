@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language Translation</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        #clear-txt-btn:disabled {
+            border: none;
+        }
+
+        .video-container {
+            position: relative;
+            width: 600px;
+            height: 440px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        #loading-message {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            color: black;
+            font-size: 25px;
+            text-align: center;
+        }
+
+        .loading-gif {
+            max-width: 100%;
+            max-height: 100%;
+            height: 100%;
+            width: 40%;
+            margin: 0px 0px 0px 0px;
+        }
+
+        .message-content {
+            color: hsl(0, 0%, 68%);
+            font-weight: bold;
+            font-family: "Anonymous Pro", monospace;
+            font-size: 20px;
+            overflow: hidden;
+            border-right: 2px solid hsl(0, 0%, 80%);
+            white-space: nowrap;
+            animation: typewriter 4s steps(44) 1s 1 normal both,
+                blinkTextCursor 500ms infinite;
+            margin: auto;
+        }
+
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 300px;
+            }
+        }
+
+        @keyframes blinkTextCursor {
+            from {
+                border-right-color: hsl(0, 0%, 80%);
+            }
+
+            to {
+                border-right-color: transparent;
+            }
+        }
+
+        #button1,
+        #button2,
+        #button3 {
+            cursor: pointer;
+            width: 20%;
+            text-transform: capitalize;
+            font-style: italic;
+        }
+
+        #play-button {
+            position: absolute;
+            top: 85%;
+            left: 20px;
+            /* Adjust this value to place the button where you want */
+            transform: translate(0, -50%);
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .form {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            border: 3px dashed grey;
+            border-radius: 10px;
+
+        }
+
+        .video-custom {
+            border: 3px dashed grey;
+            border-radius: 10px;
+        }
+
+        .form div {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            color: black;
+            position: absolute;
+            top: 30%;
+            z-index: 1;
+        }
+
+        .form input {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            width: 19%;
+            height: 50%;
+            outline: none;
+            opacity: 0;
+            z-index: 2;
+            top: 30%;
+            left: 21%;
+        }
+
+        .form button {
+            border-radius: 10px;
+            padding: 10px 20px;
+            background: transparent;
+            outline: none;
+            border-color: #1950A3;
+            color: #1950A3;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        #fileName::before {
+            content: 'File Name:';
+        }
+
+        #fileName {
+            position: relative;
+            top: 50px;
+            display: block;
+            text-align: left;
+            margin-left: 5px;
+        }
+
+        .dark-grey-icon {
+            padding-top: 30px;
+            font-size: 24px;
+            color: #9aa0a6;
+            cursor: pointer;
+        }
+
+        .dark-grey-icon:hover {
+            color: #c0c4c8;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Just an image -->
+    <nav class="navbar navbar-light bg-light shadow">
+        <div class="container ms-3">
+            <!-- Title -->
+            <p class="mt-3 pg-title">
+                <i class="fa-solid fa-hands-bubbles fa-beat-fade fa-2x"></i>
+                Sign Translate
+            </p>
+        </div>
+    </nav>
+
+    <form action="/upload" method="GET">
+        <div class="container-fluid push-top h-100 m-0 p-4" style="background-color: #eeeded;">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-11">
+                    <button type="submit" class="btn btn-primary" name="submit_button" value="webcam">
+                        <i class="fa-solid fa-video"></i>
+                        Webcam
+                    </button>
+                    <button type="button" class="btn btn-secondary ms-2" disabled>
+                        <i class="fa-solid fa-upload"></i>
+                        Upload
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="container push-top p-5 pt-4">
+        <!-- Contents -->
+        <!-- Translation -->
+        <div class="row border border-secondary border-3 rounded-3 text-center d-flex justify-content-center p-2">
+
+            <div class="col-6">
+                <div class="card t-result-card w-100">
+                    <!-- Container for the video and timer -->
+                    <div class="video-container w-100 h-100">
+                        <!-- upload video -->
+                        <form action="{{ url_for('upload') }}" id="video-upload-form" method="POST"
+                            enctype="multipart/form-data">
+                            <div class="form">
+                                <input name="file" id="entry_value" ref="fileInput" type="file" onchange="getFileName()"
+                                    accept=".mp4">
+                                <div>
+                                    <img src="{{ url_for('static', filename='upload.png') }}" alt="upload" width="7%"
+                                        class="mx-2">
+                                    Upload your files here or
+                                    <button type="button" class="btn bg-color-dblue btn-primary ms-2">Browse</button>
+                                </div>
+                                <span id="fileName" class="text-primary "></span>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+                <br>
+                <div class="card t-result-card video-custom w-100" style="background-color: rgba(53, 53, 53, 0.2);">
+                    <img src="{{ url_for('static', filename='no_video.jpg') }}" style="display:block;"
+                        id="image-no-video" alt="upload">
+                    <video id="uploadedVideo" style="display:none;" controls loop></video>
+                </div>
+            </div>
+
+            <div class="col-1">
+                <form id="swapSignForm" method="GET" action="{{ url_for('text_to_sign') }}"></form>
+                <i class="fa-solid fa-right-left dark-grey-icon" title="swap-sign" id="submitIcon"></i>
+            </div>
+
+            <!-- Result -->
+            <div class="col-5 p-0">
+                <div class="card t-result-card" style="height: 15%;">
+                    <div class="card-body d-flex align-items-center justify-content-around">
+                        <p class="card-text m-0" style="color:rgb(248, 26, 27);"><b>Did You Mean :</b></p>
+                        <a href="#" class="btn btn-primary" id="button1">...</a>
+                        <a href="#" class="btn btn-primary" id="button2">...</a>
+                        <a href="#" class="btn btn-primary" id="button3">...</a>
+                    </div>
+                </div>
+                <br>
+                <div class="card t-result-card text-dark" style="height: 80.3%;">
+                    <div class="card-body d-flex flex-column position-relative">
+                        <h5 class="text-center border-2 border-bottom pb-2" style="color: rgb(16, 80, 183);">Translated
+                            Result</h5>
+                        <div id="loading-message" class="my-5">
+                            <img id="loading-gif" class="loading-gif" src="{{ url_for('static', filename='duck.gif') }}"
+                                alt="Loading GIF">
+                            <h1 class="message-content">Translating... Please wait.</h1>
+                        </div>
+                        <div class="flex-grow-1" id="predicted_result"></div>
+
+                        <!-- Clear Text Button -->
+                        <div class="border-2 border-top pt-3">
+                            <button type="button" class="btn btn-white btn-lg btn-floating float-end"
+                                id="clear-txt-btn">
+                                <i class="fa-solid fa-rotate"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        // Clear all text
+        const clearButton = document.querySelector('#clear-txt-btn');
+        clearButton.addEventListener('click', function () {
+            const predictedResultDiv = document.getElementById('predicted_result');
+            predictedResultDiv.innerText = ""; // Clear the content of the <div>
+        });
+
+        function getFileName() {
+            var videoInput = document.getElementById('entry_value')
+            var videoPlayer = document.getElementById('uploadedVideo');
+            var imageDisplay = document.getElementById('image-no-video');
+            const form = document.getElementById('video-upload-form');
+            const predictedResultDiv = document.getElementById('predicted_result');
+            document.getElementById('fileName').innerHTML = videoInput.value.split('\\').pop()
+
+            // Check if a file is selected
+            if (videoInput.files.length > 0) {
+                var file = videoInput.files[0];
+                // Get the name of the file
+                var fileName = file.name;
+                console.log(fileName)
+                var videoURL = URL.createObjectURL(file);
+
+                // Set the video source and display the player
+                videoPlayer.src = videoURL;
+                console.log(videoURL)
+
+                videoPlayer.style.display = 'block';
+                imageDisplay.style.display = 'None';
+
+                // Send the form data to the server using AJAX
+                const formData = new FormData(form);
+                formData.append('fileName', fileName);
+
+                // display loading message
+                document.getElementById('loading-message').style.display = 'block';
+                // disable the clear button
+                document.getElementById('clear-txt-btn').disabled = true;
+
+                // Send the form data to the server using AJAX
+                fetch('{{ url_for("upload") }}', {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then(response => response.json())
+                    .then(data => {
+
+                        document.getElementById('loading-message').style.display = 'none';
+                        // enabled the clear button
+                        document.getElementById('clear-txt-btn').disabled = false;
+
+                        const top_n_signs = data.prediction;
+
+                        predictedResultDiv.textContent += top_n_signs[0] + ' ';
+
+                        // Set the text content of the buttons
+                        document.getElementById('button1').innerText = top_n_signs[0];
+                        document.getElementById('button2').innerText = top_n_signs[1];
+                        document.getElementById('button3').innerText = top_n_signs[2];
+
+                        // addPunctuation();
+                    })
+                    .catch(error => console.error('Error fetching predicted result:', error));
+            }
+        }
+
+        function handleButtonClick(buttonId) {
+            const predictedResultDiv = document.getElementById('predicted_result');
+            const currentText = predictedResultDiv.textContent.trim(); // Remove leading/trailing spaces
+            const buttonText = document.getElementById(buttonId).innerText;
+
+            // Split the current text into words
+            const words = currentText.split(' ');
+
+            // remove the last word
+            words.pop();
+            originWords = words.join(' ');
+            // add the button text to origin words
+            words.push(buttonText);
+            const updatedText = words.join(' ');
+
+            // Apply styling to the last word
+            const styledText = `<span style="color: green; font-weight: bold; text-decoration: underline;">${buttonText}</span>`;
+
+            // Update the predicted result with styling
+            predictedResultDiv.innerHTML = originWords + ' ' + styledText;
+
+            // Reset styling after 5 seconds
+            setTimeout(() => {
+                predictedResultDiv.textContent = updatedText + ' '; // Remove the styling
+            }, 2000);
+
+        }
+
+        // Add click event listeners to the buttons
+        document.getElementById('button1').addEventListener('click', () => handleButtonClick('button1'));
+        document.getElementById('button2').addEventListener('click', () => handleButtonClick('button2'));
+        document.getElementById('button3').addEventListener('click', () => handleButtonClick('button3'));
+
+
+        document.getElementById('submitIcon').addEventListener('click', function () {
+            document.getElementById('swapSignForm').submit();
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

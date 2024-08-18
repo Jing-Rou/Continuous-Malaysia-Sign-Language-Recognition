@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language Translation</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        #clear-txt-btn:disabled {
+            border: none;
+        }
+
+        .bi.bi-record-circle,
+        .bi.bi-stop-circle-fill {
+            font-size: 30px;
+            color: red;
+        }
+
+        .bi.bi-camera-video,
+        .bi.bi-camera-video-off {
+            font-size: 30px;
+            color: white;
+        }
+
+        .video-container {
+            position: relative;
+            width: 600px;
+            height: 440px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .timer {
+            position: absolute;
+            bottom: 10px;
+            /* Add space at the bottom */
+            left: 51.9%;
+            /* Center horizontally */
+            transform: translateX(-50%);
+            /* Center the timer */
+            background-color: rgba(77, 77, 77, 0.7);
+            color: white;
+            text-align: center;
+            padding: 5px;
+            font-size: 18px;
+            width: 120px;
+        }
+
+        #loading-message {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            color: black;
+            font-size: 25px;
+            text-align: center;
+        }
+
+        .loading-gif {
+            max-width: 100%;
+            max-height: 100%;
+            height: 80%;
+            width: 80%;
+            margin: 0px 0px 0px 0px;
+        }
+
+        .message-content {
+            color: hsl(0, 0%, 68%);
+            font-weight: bold;
+            font-family: "Anonymous Pro", monospace;
+            font-size: 20px;
+            overflow: hidden;
+            border-right: 2px solid hsl(0, 0%, 80%);
+            white-space: nowrap;
+            animation: typewriter 4s steps(44) 1s 1 normal both,
+                blinkTextCursor 500ms infinite;
+            margin: auto;
+        }
+
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 300px;
+            }
+        }
+
+        @keyframes blinkTextCursor {
+            from {
+                border-right-color: hsl(0, 0%, 80%);
+            }
+
+            to {
+                border-right-color: transparent;
+            }
+        }
+
+        #button1,
+        #button2,
+        #button3 {
+            cursor: pointer;
+            width: 20%;
+            text-transform: capitalize;
+            font-style: italic;
+        }
+
+        .video-container {
+            position: relative;
+        }
+
+        #play-button {
+            position: absolute;
+            top: 85%;
+            left: 20px;
+            /* Adjust this value to place the button where you want */
+            transform: translate(0, -50%);
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .dark-grey-icon {
+            padding-top: 30px;
+            font-size: 24px;
+            color: #9aa0a6;
+            cursor: pointer;
+        }
+
+        .dark-grey-icon:hover {
+            color: #c0c4c8;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Just an image -->
+    <nav class="navbar navbar-light bg-light shadow">
+        <div class="container ms-3 mb-3">
+            <!-- Title -->
+            <a href="{{ url_for('menu') }}" class="mt-3 pg-title">
+                <i class="fa-solid fa-hands-bubbles fa-beat-fade fa-2x"></i>
+                Sign Translate
+            </a>
+        </div>
+    </nav>
+
+    <form action="/upload" method="GET">
+        <div class="container-fluid push-top h-100 m-0 p-4" style="background-color: #eeeded;">
+            <div class="row">
+                <div class="col-md-1"></div>
+
+                <div class="col-md-11">
+                    <button type="button" class="btn btn-primary" disabled>
+                        <i class="fa-solid fa-video"></i>
+                        Webcam
+                    </button>
+                    <button type="submit" class="btn btn-secondary ms-2" name="submit_button" value="video_upload">
+                        <i class="fa-solid fa-upload"></i>
+                        Upload
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="container push-top p-5 pt-4">
+        <!-- Contents -->
+        <!-- Translation -->
+        <div class="row border border-secondary border-3 rounded-3 text-center d-flex justify-content-center p-2">
+
+            <div class="col-6 bg-dark">
+                <!-- Container for the video and timer -->
+                <div class="video-container">
+                    <!-- Video Frame -->
+                    <iframe src="http://localhost:5000/video_feed" width="600" height="440" scrolling="no"></iframe>
+
+                    <!-- Timer -->
+                    <div class="timer rounded-pill" style="display: none;">
+                        <span id="minutes">00</span>:<span id="seconds">00</span>
+                    </div>
+                </div>
+
+                <!-- Form and Icon (Placed Below the Video Frame) -->
+                <div class="pt-1 pb-2" style="background-color: rgb(53, 53, 53); width: 600px;">
+                    <form method="post" action="{{ url_for('tasks') }}" id="translate-form">
+                        <div class="container">
+                            <div style="display: flex; align-items: center;">
+                                <div class="form-check form-switch" style="margin-right: 175px;">
+                                    <input class="form-check-input" type="checkbox" role="switch"
+                                        id="flexSwitchCheckChecked" name="camera-check" value="">
+                                    <label class="form-check-label text-white"
+                                        for="flexSwitchCheckChecked">Camera</label>
+                                </div>
+                                <i class="bi bi-record-circle" id="record-icon" style="cursor: pointer;"></i>
+                                <input type="hidden" name="rec" id="recID" value="">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-1">
+                <form id="swapSignForm" method="GET" action="{{ url_for('text_to_sign') }}"></form>
+                <i class="fa-solid fa-right-left dark-grey-icon" title="swap-sign" id="submitIcon"></i>
+            </div>
+
+            <!-- Result -->
+            <div class="col-5 p-0">
+                <div class="card t-result-card" style="height: 15%;">
+                    <div class="card-body d-flex align-items-center justify-content-around">
+                        <p class="card-text m-0" style="color:rgb(248, 26, 27);"><b>Did You Mean :</b></p>
+                        <a href="#" class="btn btn-primary" id="button1">...</a>
+                        <a href="#" class="btn btn-primary" id="button2">...</a>
+                        <a href="#" class="btn btn-primary" id="button3">...</a>
+                    </div>
+                </div>
+                <br>
+                <div class="card t-result-card text-dark" style="height: 80.3%;">
+                    <div class="card-body d-flex flex-column position-relative">
+                        <h5 class="text-center border-2 border-bottom pb-2" style="color: rgb(16, 80, 183);">Translated
+                            Result</h5>
+                        <div id="loading-message" class="my-5">
+                            <img id="loading-gif" class="loading-gif" src="{{ url_for('static', filename='crab.gif') }}"
+                                alt="Loading GIF">
+                            <h1 class="message-content">Translating... Please wait.</h1>
+                        </div>
+                        <div class="flex-grow-1" id="predicted_result"></div>
+
+                        <!-- Clear Text Button -->
+                        <div class="border-2 border-top pt-3">
+                            <button type="button" class="btn btn-white btn-lg btn-floating float-end"
+                                id="clear-txt-btn">
+                                <i class="fa-solid fa-rotate"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        // Get the checkbox element
+        var checkbox = document.getElementById("flexSwitchCheckChecked");
+
+        // Uncheck the checkbox when the page loads
+        checkbox.checked = false;
+
+        // Get the current state of the checkbox
+        const value = checkbox.checked ? 'open' : 'close';
+        checkbox.value = value
+
+        // Clear all text
+        const clearButton = document.querySelector('#clear-txt-btn');
+        clearButton.addEventListener('click', function () {
+            const predictedResultDiv = document.getElementById('predicted_result');
+            predictedResultDiv.innerText = ""; // Clear the content of the <div>
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const recordIcon = document.getElementById('record-icon');
+            const startIcon = document.getElementById('start-icon');
+            const form = document.getElementById('translate-form');
+            const timerDiv = document.querySelector('.timer');
+            const minutesSpan = document.getElementById('minutes');
+            const secondsSpan = document.getElementById('seconds');
+            let isRecording = false;
+            let isCamera = false;
+            let timerInterval;
+            let totalSeconds = 0;
+
+            recordIcon.addEventListener('click', function () {
+                if (!isRecording) {
+                    isRecording = true;
+
+                    // Start the timer
+                    timerInterval = setInterval(updateTimer, 1000);
+
+                    // Display the timer
+                    timerDiv.style.display = 'block';
+
+                    // Change the class to "bi bi-stop-circle"
+                    recordIcon.classList.remove('bi-record-circle');
+                    recordIcon.classList.add('bi-stop-circle-fill');
+                    // Change the cursor style
+                    checkbox.style.cursor = 'not-allowed';
+                    checkbox.disabled = true;
+
+                    const recV = document.getElementById('recID');
+                    recV.value = 'Start/Stop Recording';
+
+                    // Send the form data to the server using AJAX
+                    fetch('{{ url_for("tasks") }}', {
+                        method: 'POST',
+                        body: new FormData(form),
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`An error occurred: ${response.statusText}`);
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+
+                } else {
+                    isRecording = false;
+
+                    // Stop the timer
+                    clearInterval(timerInterval);
+
+                    // Hide the timer
+                    timerDiv.style.display = 'none';
+
+                    // Reset the timer to zero
+                    totalSeconds = 0;
+
+                    // Update the timer display to show 00:00
+                    minutesSpan.textContent = '00';
+                    secondsSpan.textContent = '00';
+
+                    // Change the class back to "bi bi-record-circle"
+                    recordIcon.classList.remove('bi-stop-circle-fill');
+                    recordIcon.classList.add('bi-record-circle');
+
+                    // display loading message
+                    document.getElementById('loading-message').style.display = 'block';
+                    // disable the clear button
+                    document.getElementById('clear-txt-btn').disabled = true;
+                    // Disable the click event for the recordIcon
+                    recordIcon.style.pointerEvents = "none";
+                    // Change the cursor style
+                    recordIcon.style.cursor = 'not-allowed';
+
+                    fetch('{{ url_for("tasks") }}', {
+                        method: 'POST',
+                        body: new FormData(form),
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`An error occurred: ${response.statusText}`);
+                            }
+                        })
+                        .then(data => {
+                            document.getElementById('loading-message').style.display = 'none';
+                            // enabled the clear button
+                            document.getElementById('clear-txt-btn').disabled = false;
+                            // To enable the click event back.
+                            recordIcon.style.pointerEvents = "auto";
+                            // Change the cursor style
+                            recordIcon.style.cursor = 'pointer';
+                            checkbox.disabled = false;
+                            checkbox.style.cursor = 'pointer';
+                            // Handle the response as needed (e.g., update the UI)
+                            updatePredictedResult();
+                        })
+                        .catch(error => console.error('Error:', error));
+                }
+            });
+
+            const checkbox = document.getElementById('flexSwitchCheckChecked');
+            const predictedResultDiv = document.getElementById('predicted_result');
+
+            checkbox.addEventListener('change', function () {
+                // if (checkbox.checked) {
+                // Get the current state of the checkbox
+                const value = checkbox.checked ? 'open' : 'close';
+                checkbox.value = value
+
+                const recV = document.getElementById('recID');
+                recV.value = 'None';
+
+                // Send the form data to the server using AJAX
+                fetch('{{ url_for("tasks") }}', {
+                    method: 'POST',
+                    body: new FormData(form),
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`An error occurred: ${response.statusText}`);
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+                // }
+            });
+
+            function updatePredictedResult() {
+                // Send an AJAX request to the Flask backend to get the predicted result
+                fetch('http://127.0.0.1:5000/get_predicted_result')
+                    .then(response => response.json())
+                    .then(data => {
+
+                        const top_n_signs = data.prediction;
+                        console.log('1.:', top_n_signs[0])
+
+                        predictedResultDiv.textContent += top_n_signs[0] + ' ';
+
+                        // Set the text content of the buttons
+                        document.getElementById('button1').innerText = top_n_signs[0];
+                        document.getElementById('button2').innerText = top_n_signs[1];
+                        document.getElementById('button3').innerText = top_n_signs[2];
+
+                        addPunctuation();
+                    })
+                    .catch(error => console.error('Error fetching predicted result:', error));
+            }
+
+            function addPunctuation() {
+                const predictedResultValue = predictedResultDiv.textContent.trim();
+
+                const apiUrl = `http://127.0.0.1:5000/textpreprocessing?input_text=${encodeURIComponent(predictedResultValue)}`;
+
+                // Send an AJAX request to the Flask backend to get the predicted result
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Predicted Result:', predictedResultValue);
+                        predictedResultDiv.textContent = data.processed_text;
+
+                    })
+                    .catch(error => console.error('Error fetching predicted result:', error));
+            }
+
+            function handleButtonClick(buttonId) {
+                const predictedResultDiv = document.getElementById('predicted_result');
+                const currentText = predictedResultDiv.textContent.trim(); // Remove leading/trailing spaces
+                const buttonText = document.getElementById(buttonId).innerText;
+
+                // Split the current text into words
+                const words = currentText.split(' ');
+
+                // remove the last word
+                words.pop();
+                originWords = words.join(' ');
+                // add the button text to origin words
+                words.push(buttonText);
+                const updatedText = words.join(' ');
+
+                // Apply styling to the last word
+                const styledText = `<span style="color: green; font-weight: bold; text-decoration: underline;">${buttonText}</span>`;
+
+                // Update the predicted result with styling
+                predictedResultDiv.innerHTML = originWords + ' ' + styledText;
+
+                // Reset styling after 5 seconds
+                setTimeout(() => {
+                    predictedResultDiv.textContent = updatedText + ' '; // Remove the styling
+                }, 2000);
+
+            }
+
+            // Add click event listeners to the buttons
+            document.getElementById('button1').addEventListener('click', () => handleButtonClick('button1'));
+            document.getElementById('button2').addEventListener('click', () => handleButtonClick('button2'));
+            document.getElementById('button3').addEventListener('click', () => handleButtonClick('button3'));
+
+            function updateTimer() {
+                totalSeconds++;
+                const minutes = Math.floor(totalSeconds / 60);
+                const seconds = totalSeconds % 60;
+
+                // Update the timer display
+                minutesSpan.textContent = String(minutes).padStart(2, '0');
+                secondsSpan.textContent = String(seconds).padStart(2, '0');
+            }
+
+        });
+
+        document.getElementById('submitIcon').addEventListener('click', function () {
+            document.getElementById('swapSignForm').submit();
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

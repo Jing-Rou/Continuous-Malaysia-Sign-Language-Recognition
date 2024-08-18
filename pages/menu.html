@@ -1,0 +1,2906 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language Translation</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Just an image -->
+    <nav class="navbar navbar-light bg-light shadow">
+        <div class="container ms-3 mb-3">
+            <!-- Title -->
+            <a href="{{ url_for('index') }}" class="mt-3 pg-title">
+                <i class="fa-solid fa-hands-bubbles fa-beat-fade fa-2x"></i>
+                Sign Translate
+            </a>
+        </div>
+    </nav>
+
+    <div class="container m-0 p-4" style="background-color: #eeeded; height: 660px; max-width: fit-content;">
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/after.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>After</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/airplane.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Airplane</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/all.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>All</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/alligator.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Alligator</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/animal.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Animal</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/another.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Another</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/any.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Any</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/apple.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Apple</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/arm.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Arm</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/aunt.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Aunt</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/because.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Because</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bed.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bed</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bedroom.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bedroom</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bee.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bee</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/before.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Before</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/beside.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Beside</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/better.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Better</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bird.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bird</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/black.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Black</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/blow.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Blow</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/blue.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Blue</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/boat.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Boat</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/book.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Book</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/boy.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Boy</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/brother.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Brother</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/brown.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Brown</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bug.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bug</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bye.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bye</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/callonphone.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Callonphone</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/can.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Can</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/car.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Car</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/carrot.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Carrot</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/cat.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Cat</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/cereal.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Cereal</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/awake.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Awake</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/backyard.gif') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Backyard</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bad.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bad</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/balloon.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Balloon</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-image p-0" style="max-width: 22rem;">
+                    <img src="{{ url_for('static', filename='Menu_Img/bath.jpg') }}" class="w-100"
+                        style="height: 186px" />
+                    <div class="mask text-light d-flex justify-content-center flex-column text-center"
+                        style="background-color: rgba(0, 0, 0, 0.5)">
+                        <h4>Bath</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

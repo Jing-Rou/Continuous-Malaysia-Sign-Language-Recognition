@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language Translation</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        #clear-txt-btn:disabled {
+            border: none;
+        }
+
+        .video-container {
+            position: relative;
+            width: 600px;
+            height: 440px;
+        }
+
+        .video-custom {
+            border: 3px dashed grey;
+            border-radius: 10px;
+        }
+
+        .dark-grey-icon {
+            padding-top: 30px;
+            font-size: 24px;
+            color: #9aa0a6;
+            cursor: pointer;
+        }
+
+        .dark-grey-icon:hover {
+            color: #c0c4c8;
+        }
+
+        [contenteditable] {
+            outline: 0px solid transparent;
+            font-size: 30px;
+        }
+
+        #predicted_result[placeholder]:empty:before {
+            content: attr(placeholder);
+            color: #9aa0a6;
+            font-size: 30px;
+        }
+
+        #predicted_result[placeholder]:empty:focus:before {
+            content: "";
+        }
+
+        .btn-circle {
+            width: 50px;
+            height: 50px;
+            padding: 6px 0px;
+            border-radius: 30px;
+            text-align: center;
+            font-size: 20px;
+            line-height: 1.42857;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Just an image -->
+    <nav class="navbar navbar-light bg-light shadow">
+        <div class="container ms-3">
+            <!-- Title -->
+            <p class="mt-3 pg-title">
+                <i class="fa-solid fa-hands-bubbles fa-beat-fade fa-2x"></i>
+                Sign Translate
+            </p>
+        </div>
+    </nav>
+
+    <form action="/upload" method="GET">
+        <div class="container-fluid push-top h-100 m-0 p-4" style="background-color: #eeeded;">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-11">
+                    <button type="submit" class="btn btn-primary" name="submit_button" value="webcam">
+                        <i class="fa-solid fa-video"></i>
+                        Webcam
+                    </button>
+                    <button type="submit" class="btn btn-secondary ms-2" name="submit_button" value="video_upload">
+                        <i class="fa-solid fa-upload"></i>
+                        Upload
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="container push-top p-5 pt-4">
+        <!-- Contents -->
+        <!-- Translation -->
+        <div class="row border border-secondary border-3 rounded-3 d-flex text-center justify-content-center p-2">
+
+            <!-- Result -->
+            <div class="col-5 p-0">
+                <div class="card t-result-card text-dark h-100">
+                    <div class="card-body d-flex flex-column position-relative">
+                        <h5 class="text-center border-2 border-bottom pb-2" style="color: rgb(16, 80, 183);">Text In
+                            English</h5>
+                        <form class="flex-grow-1 text-start" id="text_to_signForm" method="POST"
+                            action="{{ url_for('translate_btn') }}">
+                            <div name="predicted_result" id="predicted_result" contenteditable="true"
+                                placeholder="Enter Text ..."></div>
+                        </form>
+
+                        <!-- Clear Text Button -->
+                        <div class="border-2 border-top pt-3">
+                            <button type="button" class="btn btn-white btn-lg btn-floating float-end"
+                                id="clear-txt-btn">
+                                <i class="fa-solid fa-rotate"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-1 d-flex justify-content-center">
+                <div class="row">
+                    <div class="col-12">
+                        <form id="swapSignForm" method="GET" action="{{ url_for('text_to_sign') }}"></form>
+                        <i class="fa-solid fa-right-left dark-grey-icon" title="swap-sign"></i>
+                    </div>
+
+                    <div class="col-12">
+                        <button type="button" id="submitIcon" class="btn btn-primary btn-circle"
+                            onclick="submitToFlask()"><span class="bi bi-caret-right-fill"></span></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 p-0">
+                <div class="card t-result-card w-100">
+                    <!-- Container for the video and timer -->
+                    <div class="video-container w-100 h-100">
+                        <!-- upload video -->
+                        <form action="{{ url_for('video_skeletion') }}" id="video-upload-form" method="POST"
+                            enctype="multipart/form-data">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle w-100" type="button"
+                                    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Dropdown button
+                                </button>
+                                <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#" onclick="submitForm('Video')">Video</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="submitForm('Skeleton Pose')">Skeleton
+                                            Pose</a></li>
+                                </ul>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+                <br>
+                <div class="card t-result-card video-custom w-100" style="background-color: rgba(53, 53, 53, 0.2);">
+                    <img src="{{ url_for('static', filename='no_video.jpg') }}" style="display:block;"
+                        id="image-no-video" alt="upload">
+                    <video id="uploadedVideo" style="display:none;" controls loop></video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        // Clear all text
+        const clearButton = document.querySelector('#clear-txt-btn');
+        clearButton.addEventListener('click', function () {
+            const predictedResultDiv = document.getElementById('predicted_result');
+            predictedResultDiv.innerText = ""; // Clear the content of the <div>
+        });
+
+        function submitToFlask() {
+            // Get the content of the div
+            var content = document.getElementById("predicted_result").innerText;
+            var videoPlayer = document.getElementById('uploadedVideo');
+            var imageDisplay = document.getElementById('image-no-video');
+
+            // Send the content to Flask using Fetch API
+            fetch('/translate_btn', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',  // Set the Content-Type header
+                },
+                body: JSON.stringify({ content: content }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Log the response data
+                    console.log('Response from Flask:', data.message);
+                    var dynamicFilename = data.message;
+
+                    // Set the video source and display the player
+                    videoPlayer.src = '/static/' + dynamicFilename;
+                    // console.log(videoURL)
+
+                    videoPlayer.style.display = 'block';
+                    imageDisplay.style.display = 'None';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function submitForm(selectedOption) {
+            var videoPlayer = document.getElementById('uploadedVideo');
+            var imageDisplay = document.getElementById('image-no-video');
+            // Check if there's an existing hidden input field
+            var existingHiddenInput = document.getElementById("hiddenInput");
+
+            // If an existing hidden input is found, remove it
+            if (existingHiddenInput) {
+                document.getElementById("video-upload-form").removeChild(existingHiddenInput);
+            }
+            // Set a hidden input field in the form to indicate the selected option
+            var hiddenInput = document.createElement("input");
+            hiddenInput.setAttribute("id", "hiddenInput");
+            hiddenInput.setAttribute("type", "hidden");
+            hiddenInput.setAttribute("name", "selectedOption");
+            hiddenInput.setAttribute("value", selectedOption);
+            document.getElementById("video-upload-form").appendChild(hiddenInput);
+
+            // Submit the form
+            // document.getElementById("video-upload-form").submit();
+
+            // Use fetch to submit the form asynchronously
+            fetch("{{ url_for('video_skeletion') }}", {
+                method: "POST",
+                body: new FormData(document.getElementById("video-upload-form")),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                    var dynamicFilename = data.message;
+                    // Set the video source and display the player
+                    videoPlayer.src = '/static/' + dynamicFilename;
+
+                    videoPlayer.style.display = 'block';
+                    imageDisplay.style.display = 'None';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
